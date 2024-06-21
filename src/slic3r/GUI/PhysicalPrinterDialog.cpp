@@ -638,7 +638,6 @@ void PhysicalPrinterDialog::update(bool printer_change)
         m_optgroup->show_field("host_type");
 
         m_optgroup->enable_field("print_host");
-        m_optgroup->enable_field("print_host_webui");
         m_optgroup->enable_field("printhost_cafile");
         m_optgroup->enable_field("printhost_ssl_ignore_revoke");
         if (m_printhost_cafile_browse_btn)
@@ -648,21 +647,12 @@ void PhysicalPrinterDialog::update(bool printer_change)
         if (Field* printhost_field = m_optgroup->get_field("print_host"); printhost_field) {
             if (wxTextCtrl* temp = dynamic_cast<TextCtrl*>(printhost_field)->text_ctrl(); temp) {
                 const auto current_host = temp->GetValue();
-                if (current_host == "https://simplyprint.io") {
+                if (current_host == "https://simplyprint.io" || current_host == "https://simplyprint.io/panel") {
                     temp->SetValue(wxString());
                 }
             }
         }
-        if (Field* printhost_webui_field = m_optgroup->get_field("print_host_webui"); printhost_webui_field) {
-            if (wxTextCtrl* temp = dynamic_cast<TextCtrl*>(printhost_webui_field)->text_ctrl(); temp) {
-                const auto current_host = temp->GetValue();
-                if (current_host == "https://simplyprint.io/panel") {
-                    temp->SetValue(wxString());
-                }
-            }
-        }
-        if (opt && opt->value == htPrusaLink)
-        {
+        if (opt->value == htPrusaLink) { // PrusaConnect does NOT allow http digest
             m_optgroup->show_field("printhost_authorization_type");
             AuthorizationType auth_type = m_config->option<ConfigOptionEnum<AuthorizationType>>("printhost_authorization_type")->value;
             m_optgroup->show_field("printhost_apikey", auth_type == AuthorizationType::atKeyPassword);
