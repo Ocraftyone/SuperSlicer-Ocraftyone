@@ -29,7 +29,6 @@ ENABLE_ENUM_BITMASK_OPERATORS(PrintHostPostUploadAction);
 
 struct PrintHostUpload
 {
-    bool use_3mf;
     boost::filesystem::path source_path;
     boost::filesystem::path upload_path;
     
