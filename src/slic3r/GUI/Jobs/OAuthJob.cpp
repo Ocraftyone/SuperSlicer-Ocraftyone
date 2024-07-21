@@ -1,6 +1,6 @@
 #include "OAuthJob.hpp"
 
-#include "Http.hpp"
+#include "slic3r/Utils/Http.hpp"
 #include "ThreadSafeQueue.hpp"
 #include "slic3r/GUI/I18N.hpp"
 #include "nlohmann/json.hpp"
