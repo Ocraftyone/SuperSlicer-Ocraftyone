@@ -107,8 +107,6 @@ public:
     void stop();
     void set_request_handler(const std::function<std::shared_ptr<Response>(const std::string&)>& m_request_handler);
 
-    static std::shared_ptr<Response> bbl_auth_handle_request(const std::string& url);
-
 private:
     class IOServer
     {
@@ -132,7 +130,7 @@ private:
 
     std::unique_ptr<IOServer> server_{nullptr};
 
-    std::function<std::shared_ptr<Response>(const std::string&)> m_request_handler{&HttpServer::bbl_auth_handle_request};
+    std::function<std::shared_ptr<Response>(const std::string&)> m_request_handler;
 };
 
 class session : public std::enable_shared_from_this<session>
