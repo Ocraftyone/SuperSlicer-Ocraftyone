@@ -85,19 +85,6 @@ static std::string url_encode(const std::vector<std::pair<std::string, std::stri
 
 static void set_auth(Http& http, const std::string& access_token) { http.header("Authorization", "Bearer " + access_token); }
 
-static bool should_open_in_external_browser()
-{
-    const auto& app = wxGetApp();
-
-    if (app.preset_bundle->use_bbl_device_tab()) {
-        // When using bbl device tab, we always need to open external browser
-        return true;
-    }
-
-    // Otherwise, if user choose to switch to device tab, then don't bother opening external browser
-    return !app.app_config->get_bool("open_device_tab_post_upload");
-}
-
 SimplyPrint::SimplyPrint(DynamicPrintConfig* config)
 {
     cred_file = (boost::filesystem::path(data_dir()) / OAUTH_CREDENTIAL_PATH).make_preferred().string();
@@ -319,13 +306,7 @@ bool SimplyPrint::do_temp_upload(const boost::filesystem::path& file_path,
             // Launch external browser for file importing after uploading
             const auto url = URL_BASE_HOME"/panel?" + url_encode({{"import", "tmp:" + uuid}, {"filename", filename}});
 
-            if (should_open_in_external_browser()) {
-                wxLaunchDefaultBrowser(url);
-            } else {
-                const auto mainframe = GUI::wxGetApp().mainframe;
-                mainframe->request_select_tab(MainFrame::TabPosition::tpMonitor);
-                mainframe->load_printer_url(url);
-            }
+            wxLaunchDefaultBrowser(url);
 
             return true;
         },
