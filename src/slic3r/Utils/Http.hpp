@@ -145,6 +145,7 @@ public:
 
 	// converts the given string to an url_encoded_string
 	static std::string url_encode(const std::string &str);
+	static std::string url_decode(const std::string &str);
 private:
 	Http(const std::string &url);
 

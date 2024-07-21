@@ -774,6 +774,20 @@ std::string Http::url_encode(const std::string &str)
 	return encoded;
 }
 
+std::string Http::url_decode(const std::string &str)
+{
+    ::CURL *curl = ::curl_easy_init();
+    if (curl == nullptr) { return str; }
+    int outlen = 0;
+    char *ce = ::curl_easy_unescape(curl, str.c_str(), str.length(), &outlen);
+    std::string decoded = std::string(ce, outlen);
+
+    ::curl_free(ce);
+    ::curl_easy_cleanup(curl);
+
+    return decoded;
+}
+
 std::ostream& operator<<(std::ostream &os, const Http::Progress &progress)
 {
 	os << "Http::Progress("
