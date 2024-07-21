@@ -95,10 +95,10 @@ void SLAImportJob::prepare()
     if (p->path.empty()) {
             p->err = _u8L("The file does not exist.");
             return;
-        }
-        p->sel  = p->import_dlg->get_selection();
+    }
+    p->sel  = p->import_dlg->get_selection();
     p->win  = p->import_dlg->get_marchsq_windowsize();
-        p->config_substitutions.clear();
+    p->config_substitutions.clear();
     p->config_substitutions.clear();
 }
 
