@@ -24,7 +24,7 @@ namespace Slic3r {
 #define URL_BASE_API "https://api.simplyprint.io"
 #endif
 
-static constexpr boost::asio::ip::port_type CALLBACK_PORT = 21328;
+static constexpr GUI::HttpServer::port_type CALLBACK_PORT = 21328;
 static const std::string CALLBACK_URL = "http://localhost:21328/callback";
 static const std::string RESPONSE_TYPE  = "code";
 static const std::string CLIENT_ID = "simplyprintorcaslicer";

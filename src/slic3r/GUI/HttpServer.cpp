@@ -136,7 +136,7 @@ void HttpServer::IOServer::stop_all()
 }
 
 
-HttpServer::HttpServer(boost::asio::ip::port_type port) : port(port) {}
+HttpServer::HttpServer(port_type port) : port(port) {}
 
 void HttpServer::start()
 {

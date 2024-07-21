@@ -69,9 +69,10 @@ public:
 
 class HttpServer
 {
-    boost::asio::ip::port_type port;
-
 public:
+    // used in place of boost::asio::ip::port_type which is not in this version of Boost
+    using port_type = uint_least16_t;
+
     class Response
     {
     public:
@@ -96,7 +97,7 @@ public:
         void write_response(std::stringstream& ssOut) override;
     };
 
-    HttpServer(boost::asio::ip::port_type port = LOCALHOST_PORT);
+    HttpServer(port_type port = LOCALHOST_PORT);
 
     boost::thread m_http_server_thread;
     bool          start_http_server = false;
@@ -126,6 +127,8 @@ private:
         void stop_all();
     };
     friend class session;
+
+    port_type port;
 
     std::unique_ptr<IOServer> server_{nullptr};
 
