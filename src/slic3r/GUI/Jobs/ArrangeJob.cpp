@@ -182,6 +182,10 @@ arrangement::ArrangePolygon ArrangeJob::get_arrange_poly_(ModelInstance *mi)
 
 void ArrangeJob::prepare()
 {
+    if (m_force_prepare_all) {
+        prepare_all();
+        return;
+    }
     wxGetKeyState(WXK_SHIFT) ? prepare_selected() : prepare_all();
 }
 
@@ -217,7 +221,7 @@ void ArrangeJob::process(Ctl &ctl)
     arrangement::arrange(m_unprintable, {}, bedpts, params);
 
     //update last arrange value
-    if (!was_canceled()) {
+    if (!ctl.was_canceled()) {
         const GLCanvas3D* canvas = m_plater->canvas3D();
         m_plater->canvas3D()->set_last_arrange_settings(canvas->get_arrange_settings().distance);
     }
@@ -227,7 +231,7 @@ void ArrangeJob::process(Ctl &ctl)
                                       _u8L("Arranging done."));
 }
 
-ArrangeJob::ArrangeJob() : m_plater{wxGetApp().plater()} {}
+ArrangeJob::ArrangeJob(bool force_prepare_all) : m_plater{wxGetApp().plater()}, m_force_prepare_all(force_prepare_all) {}
 
 static std::string concat_strings(const std::set<std::string> &strings,
                                   const std::string &delim = "\n")

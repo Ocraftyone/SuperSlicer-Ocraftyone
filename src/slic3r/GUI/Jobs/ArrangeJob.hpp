@@ -23,6 +23,7 @@ class ArrangeJob : public Job
     ArrangePolygons m_selected, m_unselected, m_unprintable;
     std::vector<ModelInstance*> m_unarranged;
     Plater *m_plater;
+    bool m_force_prepare_all{false};
 
     // clear m_selected and m_unselected, reserve space for next usage
     void clear_input();
@@ -43,7 +44,7 @@ public:
 
     void process(Ctl &ctl) override;
 
-    ArrangeJob();
+    ArrangeJob(bool force_prepare_all = false);
 
     int status_range() const
     {
@@ -51,6 +52,9 @@ public:
     }
 
     void finalize(bool canceled, std::exception_ptr &e) override;
+
+    // Enabling this option will have all objects be prepared, even if shift key is not pressed
+    void set_force_prepare_all(bool value = true) { m_force_prepare_all = value; }
 };
 
 std::optional<arrangement::ArrangePolygon> get_wipe_tower_arrangepoly(const Plater &);
