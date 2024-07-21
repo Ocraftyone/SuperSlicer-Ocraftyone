@@ -155,6 +155,7 @@ struct Http::priv
 	::CURL *curl;
 	::curl_httppost *form;
 	::curl_httppost *form_end;
+    ::curl_mime* mime;
 	::curl_slist *headerlist;
 	// Used for reading the body
 	std::string buffer;
@@ -350,6 +351,34 @@ void Http::priv::form_add_file(const char *name, const fs::path &path, const cha
 			CURLFORM_END
 		);
 	}
+}
+
+void Http::priv::mime_form_add_text(const char* name, const char* value)
+{
+    if (!mime) {
+        mime = curl_mime_init(curl);
+    }
+
+    curl_mimepart *part;
+    part = curl_mime_addpart(mime);
+    curl_mime_name(part, name);
+    curl_mime_type(part, "multipart/form-data");
+    curl_mime_data(part, value, CURL_ZERO_TERMINATED);
+}
+
+void Http::priv::mime_form_add_file(const char* name, const char* path)
+{
+    if (!mime) {
+        mime = curl_mime_init(curl);
+    }
+
+    curl_mimepart* part;
+    part = curl_mime_addpart(mime);
+    curl_mime_name(part, "file");
+    curl_mime_type(part, "multipart/form-data");
+    curl_mime_filedata(part, path);
+    // BBS specify filename after filedata
+    curl_mime_filename(part, name);
 }
 
 //FIXME may throw! Is the caller aware of it?
