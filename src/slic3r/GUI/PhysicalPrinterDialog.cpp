@@ -34,7 +34,7 @@
 #include "BonjourDialog.hpp"
 #include "MsgDialog.hpp"
 #include "OAuthDialog.hpp"
-#include "SimplyPrint.hpp"
+#include "../Utils/SimplyPrint.hpp"
 
 namespace Slic3r {
 namespace GUI {
