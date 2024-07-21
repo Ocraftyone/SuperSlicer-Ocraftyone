@@ -203,7 +203,7 @@ set(SLIC3R_GUI_SOURCES
     GUI/Jobs/UIThreadWorker.hpp
     GUI/Jobs/BusyCursorJob.hpp
     GUI/Jobs/PlaterWorker.hpp
-    GUI/Jobs/ArrangeJob.hpp
+    GUI/Jobs/WindowWorker.hpp
     GUI/Jobs/ArrangeJob.cpp
     GUI/Jobs/RotoptimizeJob.hpp
     GUI/Jobs/RotoptimizeJob.cpp
