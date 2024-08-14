@@ -5,6 +5,10 @@
 #include "slic3r/GUI/I18N.hpp"
 #include "nlohmann/json.hpp"
 
+#include <wx/event.h>
+#include <boost/log/trivial.hpp>
+#include <boost/algorithm/string/predicate.hpp>
+
 
 namespace Slic3r {
 namespace GUI {

@@ -4,6 +4,8 @@
 #include "Job.hpp"
 #include "slic3r/GUI/HttpServer.hpp"
 
+#include <wx/window.h>
+
 namespace Slic3r {
 namespace GUI {
 

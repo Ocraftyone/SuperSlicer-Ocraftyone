@@ -3,6 +3,7 @@
 
 #include <map>
 #include <chrono>
+#include <boost/log/trivial.hpp>
 
 #include "Worker.hpp"
 #include "BusyCursorJob.hpp"

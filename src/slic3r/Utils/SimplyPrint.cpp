@@ -2,6 +2,11 @@
 
 #include <openssl/sha.h>
 #include <boost/beast/core/detail/base64.hpp>
+#include <boost/log/trivial.hpp>
+#include <boost/nowide/fstream.hpp>
+#include <boost/nowide/cstdio.hpp>
+#include <boost/algorithm/string.hpp>
+#include <boost/filesystem/operations.hpp>
 
 #include "nlohmann/json.hpp"
 #include "libslic3r/Utils.hpp"

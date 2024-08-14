@@ -5,6 +5,7 @@
 #include <string>
 #include <functional>
 #include <boost/filesystem/path.hpp>
+#include <boost/filesystem/fstream.hpp>
 
 
 namespace Slic3r {
