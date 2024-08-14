@@ -21,8 +21,7 @@ class DynamicPrintConfig;
 enum class PrintHostPostUploadAction {
     None,
     StartPrint,
-    StartSimulation,
-    QueuePrint
+    StartSimulation
 };
 using PrintHostPostUploadActions = enum_bitmask<PrintHostPostUploadAction>;
 ENABLE_ENUM_BITMASK_OPERATORS(PrintHostPostUploadAction);
